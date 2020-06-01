@@ -24,7 +24,6 @@ public class ShapeFactory {
 		default:
 			shape = null;
 		}
-		
 		return shape;
 	}
 

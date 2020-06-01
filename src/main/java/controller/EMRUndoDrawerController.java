@@ -27,7 +27,7 @@ import model.ShapeEMR;
 import model.ShapeState;
 import model.State;
 
-public class EMRArrowDrawerController {
+public class EMRUndoDrawerController {
 	
 	State state;
 	Dragboard db;
@@ -269,5 +269,7 @@ public class EMRArrowDrawerController {
 			stateLabel.setText("State: Black Arrow");
 			arrowColor = "Black";
 		}
+		
+	
 	}
 }
