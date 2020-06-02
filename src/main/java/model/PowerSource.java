@@ -1,13 +1,18 @@
 package model;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Shape;
 
 public class PowerSource extends ShapeEMR{
 	
-	public PowerSource(double xCoordinate, double yCoordinate, String mainColor, String borderColor) {
-		super(xCoordinate, yCoordinate, mainColor, borderColor);
+	public PowerSource(double xCoordinate, double yCoordinate, String mainColor, String borderColor, ClipboardContent content, Dragboard db) {
+		super(xCoordinate, yCoordinate, mainColor, borderColor, content, db);
 	}
 
 	@Override
@@ -26,6 +31,23 @@ public class PowerSource extends ShapeEMR{
 		this.leftAnchor = new double[] {this.xCoordinate - ellipse.getRadiusX(),this.yCoordinate};
 		this.rightAnchor = new double[] {this.xCoordinate + ellipse.getRadiusX(),this.yCoordinate};
 		
+		ellipse.setOnDragDetected(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				 /* drag was detected, start a drag-and-drop gesture*/
+		        /* allow any transfer mode */
+		        db = ellipse.startDragAndDrop(TransferMode.ANY);
+		        
+		        /* Put a string on a dragboard */;
+		        content.putString("PowerSource");
+		        db.setContent(content);
+		        
+		        event.consume();
+				
+			}
+			
+		});
 		return ellipse;
 	}
 

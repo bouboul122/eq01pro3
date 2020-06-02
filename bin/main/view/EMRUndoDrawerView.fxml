@@ -14,20 +14,22 @@
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
             <Label fx:id="stateLabel" text="State: PowerShapes" />
-            <Button fx:id="redArrowButton" mnemonicParsing="false" onAction="#drawRed" text="Red Arrow" />
-            <Button fx:id="blackArrowButton" mnemonicParsing="false" onAction="#drawBlack" text="Black Arrow" />
+            <Button fx:id="redArrowButton" mnemonicParsing="false" text="Red Arrow" />
+            <Button fx:id="blackArrowButton" mnemonicParsing="false" text="Black Arrow" />
+            <Button fx:id="undoButton" mnemonicParsing="false" onAction="#undoButtonClicked" text="Undo" />
+            <Button fx:id="redoButton" mnemonicParsing="false" onAction="#redoButtonClicked" text="Redo" />
         </items>
       </ToolBar>
    </top>
    <left>
       <Accordion fx:id="shapeMenu" BorderPane.alignment="CENTER">
         <panes>
-          <TitledPane fx:id="powerShapes" animated="false" onMouseClicked="#goToPowerState" text="Power Shapes">
+          <TitledPane fx:id="powerShapes" animated="false" text="Power Shapes">
                <content>
                   <VBox fx:id="powerVBox" prefHeight="200.0" prefWidth="100.0" />
                </content>
           </TitledPane>
-          <TitledPane fx:id="arrowShapes" animated="false" onMouseClicked="#goToArrowState" text="Arrows">
+          <TitledPane fx:id="arrowShapes" animated="false" text="Arrows">
                <content>
                   <VBox fx:id="arrowVBox" prefHeight="200.0" prefWidth="100.0" />
                </content>

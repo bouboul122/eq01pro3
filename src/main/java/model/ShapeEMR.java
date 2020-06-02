@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.shape.Shape;
 
 public abstract class ShapeEMR {
@@ -8,21 +10,37 @@ public abstract class ShapeEMR {
 	double yCoordinate;
 	String mainColor;
 	String borderColor;
+	ClipboardContent content;
+	Dragboard db;
 	double [] topAnchor;
 	double [] bottomAnchor;
 	double [] rightAnchor;
 	double [] leftAnchor;
 	
-	ShapeEMR (double xCoordinate, double yCoordinate, String mainColor, String borderColor)
+	ShapeEMR (double xCoordinate, double yCoordinate, String mainColor, String borderColor, ClipboardContent content, Dragboard db)
 	{
 		this.xCoordinate = xCoordinate;
 		this.yCoordinate = yCoordinate;
 		this.mainColor = mainColor;
 		this.borderColor = borderColor;
+		this.content = content;
+		this.db = db;
 	}
 	
 	
 	
+	public Dragboard getDb() {
+		return db;
+	}
+
+
+
+	public void setDb(Dragboard db) {
+		this.db = db;
+	}
+
+
+
 	public double getxCoordinate() {
 		return xCoordinate;
 	}

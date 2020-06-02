@@ -2,6 +2,8 @@ package model;
 
 import java.util.Stack;
 
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
@@ -16,9 +18,9 @@ public class ArrowCommand implements Command{
 	double yBegin;
 	double yEnd;
 	
-	ArrowCommand(Pane drawingBoard, Stack<ShapeEMR> children){
+	ArrowCommand(Pane drawingBoard, Stack<ShapeEMR> children, ClipboardContent content, Dragboard db){
 		this.drawingBoard = drawingBoard;
-		this.arrowFactory = new ArrowShapeFactory();
+		this.arrowFactory = new ArrowShapeFactory(content, db);
 		this.children = children;
 	}
 	
@@ -33,10 +35,9 @@ public class ArrowCommand implements Command{
 	}
 	
 	@Override
-	public Shape deleteShape(Shape shape) {
+	public void deleteShape() {
 
-		drawingBoard.getChildren().remove(shape);
-		return shape;
+		drawingBoard.getChildren().remove(drawingBoard.getChildren().size() -1);
 	}
 
 }

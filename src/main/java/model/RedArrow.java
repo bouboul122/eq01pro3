@@ -2,6 +2,8 @@ package model;
 
  
 
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
@@ -14,8 +16,8 @@ public class RedArrow extends Arrow{
 
  
 
-    public RedArrow(double xBegin, double yBegin, double xEnd, double yEnd, String mainColor, String borderColor) {
-        super(xBegin, yBegin, xEnd, yEnd, mainColor, borderColor);
+    public RedArrow(double xBegin, double yBegin, double xEnd, double yEnd, String mainColor, String borderColor, ClipboardContent content, Dragboard db) {
+        super(xBegin, yBegin, xEnd, yEnd, mainColor, borderColor, content, db);
     }
     
     final double ARROWHEAD_ANGLE = Math.toRadians(20);
