@@ -14,8 +14,8 @@
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
             <Label fx:id="stateLabel" text="State: PowerShapes" />
-            <Button fx:id="redArrowButton" mnemonicParsing="false" text="Red Arrow" />
-            <Button fx:id="blackArrowButton" mnemonicParsing="false" text="Black Arrow" />
+            <Button fx:id="redArrowButton" mnemonicParsing="false" onAction="#redArrowButtonClicked" text="Red Arrow" />
+            <Button fx:id="blackArrowButton" mnemonicParsing="false" onAction="#blackArrowClicked" text="Black Arrow" />
             <Button fx:id="undoButton" mnemonicParsing="false" onAction="#undoButtonClicked" text="Undo" />
             <Button fx:id="redoButton" mnemonicParsing="false" onAction="#redoButtonClicked" text="Redo" />
         </items>

@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -101,7 +102,8 @@ public class EMRUndoDrawerController {
 		
 		drawingBoard.setOnDragDropped(new EventHandler<DragEvent>() {
 		    public void handle(DragEvent event) {
-		    	Shape shape;
+		    	Shape shapeDrew;
+		    	ShapeEMR shapeEMR;
 		        db = event.getDragboard();
 		        boolean success = false;
 		        if (db.hasString()) {
@@ -111,30 +113,124 @@ public class EMRUndoDrawerController {
 		        		shapeCommand = new ShapeCommand("PowerSource",drawingBoard, content, db);
 		        		shapeCommand.setxBegin(event.getX());
 		        		shapeCommand.setyBegin(event.getY());
-		        		shape = shapeCommand.drawShape().createShape();
+		        		shapeEMR = shapeCommand.drawShape();
 		        		doneCommands.add(shapeCommand);
-		        		shapeList.add(shape);
+		        		shapeDrew = shapeCommand.getShapeDrew();
+		        		shapeList.add(shapeDrew);
 		        	} else if(content.getString().contentEquals("AccumulationPower"))
 		        	{
 		        		System.out.println("AccumulationPower");
 		        		shapeCommand = new ShapeCommand("AccumulationPower",drawingBoard, content, db);
 		        		shapeCommand.setxBegin(event.getX());
 		        		shapeCommand.setyBegin(event.getY());
-		        		shape = shapeCommand.drawShape().createShape();
+		        		shapeEMR = shapeCommand.drawShape();
 		        		doneCommands.add(shapeCommand);
-		        		shapeList.add(shape);
+		        		shapeDrew = shapeCommand.getShapeDrew();
+		        		shapeList.add(shapeDrew);
 		        	}else {
-		        		shape = null;
+		        		shapeDrew = null;
+		        		shapeEMR = null;
 		        	}
-		           
+		        	
+		        	shapeDrew.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+						@Override
+						public void handle(MouseEvent event) {
+							if (arrowShapes.isExpanded()){
+								arrowCommand = new ArrowCommand(drawingBoard, arrowColor, content, db);
+								if (!firstConfirmed) {
+									System.out.println("First Confirmed");
+									first = shapeEMR;
+									firstConfirmed = !firstConfirmed;
+								}else {
+									System.out.println("second Confirmed");
+									second = shapeEMR;
+									if(first.getyCoordinate() > second.getyCoordinate() && (first.getyCoordinate()-second.getyCoordinate() > 30)) {
+										System.out.println("First Top second bottom");
+										double[] secondBottomAnchor = second.getBottomAnchor();
+										double[] firstTopAnchor = first.getTopAnchor();									
+										arrowCommand.setxBegin(firstTopAnchor[0]);
+										arrowCommand.setyBegin(firstTopAnchor[1]);
+										arrowCommand.setxEnd(secondBottomAnchor[0]);
+										arrowCommand.setyEnd(secondBottomAnchor[1]);
+										arrowCommand.drawShape();
+										shapeList.add(arrowCommand.getShapeDrew());
+										doneCommands.add(arrowCommand);
+										
+									} else if(first.getyCoordinate() < second.getyCoordinate() && second.getyCoordinate()-first.getyCoordinate() > 30) {
+										System.out.println("First bottom second top");
+										double[] secondTopAnchor = second.getTopAnchor();
+										double[] firstBottomAnchor = first.getBottomAnchor();
+										arrowCommand.setxBegin(firstBottomAnchor[0]);
+										arrowCommand.setyBegin(firstBottomAnchor[1]);
+										arrowCommand.setxEnd(secondTopAnchor[0]);
+										arrowCommand.setyEnd(secondTopAnchor[1]);
+										arrowCommand.drawShape();
+										shapeList.add(arrowCommand.getShapeDrew());
+										doneCommands.add(arrowCommand);
+										
+									} else if (first.getxCoordinate() < second.getxCoordinate()) {
+										System.out.println("First right second left");
+										double[] secondLeftAnchor = second.getLeftAnchor();
+										double[] firstRightAnchor = first.getRightAnchor();
+										arrowCommand.setxBegin(firstRightAnchor[0]);
+										arrowCommand.setyBegin(firstRightAnchor[1]);
+										arrowCommand.setxEnd(secondLeftAnchor[0]);
+										arrowCommand.setyEnd(secondLeftAnchor[1]);
+										arrowCommand.drawShape();
+										shapeList.add(arrowCommand.getShapeDrew());
+										doneCommands.add(arrowCommand);
+										
+									} else if(first.getxCoordinate() > second.getxCoordinate()) {
+										System.out.println("First left second right");
+										double[] secondRightAnchor = second.getRightAnchor();
+										double[] firstLeftAnchor = first.getLeftAnchor();
+										arrowCommand.setxBegin(firstLeftAnchor[0]);
+										arrowCommand.setyBegin(firstLeftAnchor[1]);
+										arrowCommand.setxEnd(secondRightAnchor[0]);
+										arrowCommand.setyEnd(secondRightAnchor[1]);
+										arrowCommand.drawShape();
+										shapeList.add(arrowCommand.getShapeDrew());
+										doneCommands.add(arrowCommand);
+									} 
+									
+									firstConfirmed = false;
+									secondConfirmed = false;
+									
+								}
+								
+								System.out.println("Clicked!");
+							
+							}
+							
+						}
+		        		
+		        	});
+		        	
 		           success = true;
+		           
 		        }
+		        
 		        event.setDropCompleted(success);
 		        
 		        event.consume();
 		     }
 		});
 		
+	}
+	
+	@FXML public void redArrowButtonClicked()
+	{
+		if(arrowShapes.isExpanded()) {
+			this.arrowColor = "Red";
+		}
+	}
+	
+	@FXML public void blackArrowClicked()
+	{
+		if(arrowShapes.isExpanded()) {
+			this.arrowColor = "Black";
+		}
 	}
 	
 	@FXML

@@ -2,8 +2,10 @@ package model;
 
 import java.util.Stack;
 
+import javafx.event.EventHandler;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
@@ -16,6 +18,7 @@ public class ShapeCommand implements Command{
 	double xEnd;
 	double yBegin;
 	double yEnd;
+	Shape shapeDrew;
 	
 	public ShapeCommand(String shapeToDraw, Pane drawingBoard, ClipboardContent content, Dragboard db){
 		this.shapeToDraw = shapeToDraw;
@@ -33,8 +36,8 @@ public class ShapeCommand implements Command{
 			shape =  shapeFactory.getShape(ShapeFactory.eshape.accumulationPower, this.xBegin, this.yBegin, "#FFD700", "#FF0000");
 		}
 		Shape shapeToDraw = shape.createShape();
+		this.shapeDrew = shapeToDraw;
 		drawingBoard.getChildren().add(shapeToDraw);
-		//drawingElements.add(shapeToDraw);
 		return shape;
 	}
 	
@@ -42,6 +45,11 @@ public class ShapeCommand implements Command{
 	public void deleteShape() {
 
 		drawingBoard.getChildren().remove(drawingBoard.getChildren().size() -1);
+	}
+	
+	public Shape getShapeDrew()
+	{
+		return this.shapeDrew;
 	}
 
 	public Pane getDrawingBoard() {

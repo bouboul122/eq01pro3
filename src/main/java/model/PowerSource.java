@@ -48,6 +48,8 @@ public class PowerSource extends ShapeEMR{
 			}
 			
 		});
+		
+		
 		return ellipse;
 	}
 
