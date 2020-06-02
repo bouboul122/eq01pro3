@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 import javafx.scene.input.ClipboardContent;
@@ -45,6 +46,24 @@ public class ArrowCommand implements Command{
 		drawingBoard.getChildren().remove(drawingBoard.getChildren().size() -1);
 	}
 	
+	@Override
+	public void removeFromList(ArrayList<Shape> shapeList) {
+		shapeList.remove(this.shapeDrew);
+		
+	}
+
+	@Override
+	public void addToList(ArrayList<Shape> shapeList) {
+		shapeList.add(this.shapeDrew);
+		
+	}
+	
+	@Override
+	public void redo()
+	{
+		drawingBoard.getChildren().add(this.shapeDrew);
+	}
+	
 	public double getxBegin() {
 		return xBegin;
 	}
@@ -84,5 +103,6 @@ public class ArrowCommand implements Command{
 	public void setShapeDrew(Shape shapeDrew) {
 		this.shapeDrew = shapeDrew;
 	}
+
 
 }

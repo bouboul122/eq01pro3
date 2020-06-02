@@ -116,7 +116,7 @@ public class EMRUndoDrawerController {
 		        		shapeEMR = shapeCommand.drawShape();
 		        		doneCommands.add(shapeCommand);
 		        		shapeDrew = shapeCommand.getShapeDrew();
-		        		shapeList.add(shapeDrew);
+		        		shapeCommand.addToList(shapeList);
 		        	} else if(content.getString().contentEquals("AccumulationPower"))
 		        	{
 		        		System.out.println("AccumulationPower");
@@ -126,7 +126,7 @@ public class EMRUndoDrawerController {
 		        		shapeEMR = shapeCommand.drawShape();
 		        		doneCommands.add(shapeCommand);
 		        		shapeDrew = shapeCommand.getShapeDrew();
-		        		shapeList.add(shapeDrew);
+		        		shapeCommand.addToList(shapeList);
 		        	}else {
 		        		shapeDrew = null;
 		        		shapeEMR = null;
@@ -241,6 +241,8 @@ public class EMRUndoDrawerController {
 			Command commandToUndo = doneCommands.pop();
 			commandToUndo.deleteShape();
 			deletedCommands.add(commandToUndo);
+			commandToUndo.removeFromList(shapeList);
+			System.out.println(shapeList.size());
 			
 			}
 			else {
@@ -254,9 +256,11 @@ public class EMRUndoDrawerController {
 	{
 		if(powerShapes.isExpanded()) {
 			if(deletedCommands.size() > 0) {
-			Command commandToUndo = deletedCommands.pop();
-			commandToUndo.drawShape();
-			doneCommands.add(commandToUndo);
+			Command commandToRedo = deletedCommands.pop();
+			commandToRedo.redo();
+			doneCommands.add(commandToRedo);
+			commandToRedo.addToList(shapeList);
+			System.out.println(shapeList.size());
 			
 			}
 			else {

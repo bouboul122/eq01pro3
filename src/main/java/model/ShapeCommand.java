@@ -36,16 +36,34 @@ public class ShapeCommand implements Command{
 		}else {
 			EMRShape =  shapeFactory.getShape(ShapeFactory.eshape.accumulationPower, this.xBegin, this.yBegin, "#FFD700", "#FF0000");
 		}
-		Shape shapeToDraw = EMRShape.createShape();
-		this.shapeDrew = shapeToDraw;
-		drawingBoard.getChildren().add(shapeToDraw);
+		Shape shapeEMRToShape = EMRShape.createShape();
+		this.shapeDrew = shapeEMRToShape;
+		drawingBoard.getChildren().add(shapeEMRToShape);
 		return EMRShape;
+	}
+	
+	public void redo()
+	{
+		drawingBoard.getChildren().add(shapeDrew);
 	}
 	
 	@Override
 	public void deleteShape() {
 
 		drawingBoard.getChildren().remove(drawingBoard.getChildren().size() -1);
+	}
+	
+	@Override
+	public void removeFromList(ArrayList<Shape> shapeList) {
+		shapeList.remove(this.shapeDrew);
+		
+	}
+
+	@Override
+	public void addToList(ArrayList<Shape> shapeList) {
+		
+		shapeList.add(this.shapeDrew);
+		
 	}
 	
 	public Shape getShapeDrew()
@@ -108,5 +126,7 @@ public class ShapeCommand implements Command{
 	public void setyEnd(double yEnd) {
 		this.yEnd = yEnd;
 	}
+
+	
 
 }
