@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 import javafx.event.EventHandler;
@@ -19,6 +20,7 @@ public class ShapeCommand implements Command{
 	double yBegin;
 	double yEnd;
 	Shape shapeDrew;
+	ShapeEMR EMRShape;
 	
 	public ShapeCommand(String shapeToDraw, Pane drawingBoard, ClipboardContent content, Dragboard db){
 		this.shapeToDraw = shapeToDraw;
@@ -28,17 +30,16 @@ public class ShapeCommand implements Command{
 	
 	@Override
 	public ShapeEMR drawShape() {
-		ShapeEMR shape;
 		
 		if (shapeToDraw.equals("PowerSource")) {
-			shape = shapeFactory.getShape(ShapeFactory.eshape.sourcePower, this.xBegin, this.yBegin, "#98FB98", "#008000");
+			EMRShape = shapeFactory.getShape(ShapeFactory.eshape.sourcePower, this.xBegin, this.yBegin, "#98FB98", "#008000");
 		}else {
-			shape =  shapeFactory.getShape(ShapeFactory.eshape.accumulationPower, this.xBegin, this.yBegin, "#FFD700", "#FF0000");
+			EMRShape =  shapeFactory.getShape(ShapeFactory.eshape.accumulationPower, this.xBegin, this.yBegin, "#FFD700", "#FF0000");
 		}
-		Shape shapeToDraw = shape.createShape();
+		Shape shapeToDraw = EMRShape.createShape();
 		this.shapeDrew = shapeToDraw;
 		drawingBoard.getChildren().add(shapeToDraw);
-		return shape;
+		return EMRShape;
 	}
 	
 	@Override
