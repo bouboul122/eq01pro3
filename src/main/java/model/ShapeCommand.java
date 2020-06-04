@@ -10,6 +10,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
+/*
+ * Cette classe fait partie du modele de coneption command avec ArrowCommand et Command
+ * 
+ * Elle Fait aussi partie du modele dans MVC
+ */
+
 public class ShapeCommand implements Command{
 	
 	Pane drawingBoard;

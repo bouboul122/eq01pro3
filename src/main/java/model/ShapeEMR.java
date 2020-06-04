@@ -1,6 +1,13 @@
 package model;
 
 import javafx.scene.input.ClipboardContent;
+
+/*
+ * Cette classe fait partie du modele de coneption Factory avec ShapeFactory, ArrowFactory et toutes les
+ * formes conctretes
+ * 
+ * Elle Fait aussi partie du modele dans MVC
+ */
 import javafx.scene.input.Dragboard;
 import javafx.scene.shape.Shape;
 

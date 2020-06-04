@@ -10,8 +10,13 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Shape;
 
+/*
+ * Cette classe fait partie du modele de coneption Factory avec Arrow, ShapeEMR, ShapeFactory, ArrowFactory et toutes les
+ * formes conctretes
+ * 
+ * Elle Fait aussi partie du modele dans MVC
+ */
  
-
 public class RedArrow extends Arrow{
 
  

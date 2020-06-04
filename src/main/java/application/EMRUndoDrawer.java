@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/*
+ * Cette classe contient la vue dans le modele MVC
+ */
 public class EMRUndoDrawer extends Application {
 	
     @Override

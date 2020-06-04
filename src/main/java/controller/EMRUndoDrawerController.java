@@ -30,6 +30,9 @@ import model.PowerSource;
 import model.ShapeEMR;
 import model.State;
 
+/*
+ * Cette classe fait partie du controlleur dans le modele de conception MVC
+ */
 public class EMRUndoDrawerController {
 	
 	ShapeCommand shapeCommand;
@@ -79,7 +82,6 @@ public class EMRUndoDrawerController {
 		
 		System.out.println("Initialising");
 		shapeMenu.setExpandedPane(powerShapes);
-		//state = new ShapeState();
 		System.out.println(powerShapes.isExpanded());
 		
 		//Adding dans les VBox

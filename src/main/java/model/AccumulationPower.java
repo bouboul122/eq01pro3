@@ -10,6 +10,12 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+/*
+ * Cette classe fait partie du modele de coneption Factory avec ShapeEMR, ShapeFactory, ArrowFactory, Arrow et toutes les
+ * formes conctretes
+ * 
+ * Elle Fait aussi partie du modele dans MVC
+ */
 public class AccumulationPower extends ShapeEMR{
 	
 	public AccumulationPower(double xCoordinate, double yCoordinate, String mainColor, String borderColor, ClipboardContent content, Dragboard db) {
@@ -47,11 +53,10 @@ public class AccumulationPower extends ShapeEMR{
 
 			@Override
 			public void handle(MouseEvent event) {
-				 /* drag was detected, start a drag-and-drop gesture*/
-		        /* allow any transfer mode */
+
 		        db = shape.startDragAndDrop(TransferMode.ANY);
 		        
-		        /* Put a string on a dragboard */
+
 		        content.putString("AccumulationPower");
 		        db.setContent(content);
 		        
